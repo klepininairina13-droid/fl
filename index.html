@@ -30,48 +30,43 @@ html, body { width: 100%; height: 100%; height: 100dvh; overflow: hidden; font-f
 .session-info { background: rgba(255,255,255,0.08); backdrop-filter: blur(10px); padding: 10px 18px; border-radius: 20px; font-size: 14px; font-weight: 600; color: rgba(255,255,255,0.8); border: 1px solid rgba(255,255,255,0.15); flex-shrink: 0; }
 .trainer-content { flex: 1; display: flex; flex-direction: column; padding: 0 20px 10px; overflow: hidden; position: relative; }
 .game-zone { flex: 1; position: relative; border-radius: 24px; overflow: hidden; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); box-shadow: inset 0 2px 20px rgba(0,0,0,0.3); }
-.stats-bar { display: flex; justify-content: space-around; padding: 15px 20px; background: rgba(255,255,255,0.05); backdrop-filter: blur(10px); border-radius: 20px; margin-top: 15px; border: 1px solid rgba(255,255,255,0.1); flex-shrink: 0; }
+.stats-bar { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; padding: 12px 10px; background: rgba(255,255,255,0.05); backdrop-filter: blur(10px); border-radius: 20px; margin-top: 12px; border: 1px solid rgba(255,255,255,0.1); flex-shrink: 0; }
 .stat-item { text-align: center; }
-.stat-value { font-size: 24px; font-weight: 700; color: rgba(255,255,255,0.9); margin-bottom: 4px; }
-.stat-label { font-size: 11px; font-weight: 500; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 1px; }
-.action-btn { background: rgba(100,200,255,0.15); backdrop-filter: blur(15px); color: rgba(255,255,255,0.9); border: none; padding: 20px 50px; border-radius: 45px; font-size: 18px; font-weight: 600; font-family: inherit; cursor: pointer; margin-top: 15px; transition: all 0.3s ease; align-self: center; flex-shrink: 0; border: 1px solid rgba(100,200,255,0.3); box-shadow: 0 6px 20px rgba(100,200,255,0.2); position: relative; }
+.stat-value { font-size: 20px; font-weight: 700; color: rgba(255,255,255,0.9); margin-bottom: 3px; }
+.stat-label { font-size: 9px; font-weight: 500; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 0.5px; }
+.action-btn { background: rgba(100,200,255,0.15); backdrop-filter: blur(15px); color: rgba(255,255,255,0.9); border: none; padding: 20px 50px; border-radius: 45px; font-size: 18px; font-weight: 600; font-family: inherit; cursor: pointer; margin-top: 12px; transition: all 0.3s ease; align-self: center; flex-shrink: 0; border: 1px solid rgba(100,200,255,0.3); box-shadow: 0 6px 20px rgba(100,200,255,0.2); position: relative; }
 .action-btn::before { content: ''; position: absolute; top: 0; left: 10%; right: 10%; height: 45%; background: linear-gradient(180deg, rgba(255,255,255,0.2) 0%, transparent 100%); border-radius: 45px 45px 30px 30px; pointer-events: none; }
 .action-btn:active { transform: translateY(2px) scale(0.97); }
 .action-btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
 .completion-screen { position: absolute; inset: 0; display: none; flex-direction: column; align-items: center; justify-content: center; background: rgba(10,10,15,0.95); backdrop-filter: blur(20px); z-index: 20; padding: 40px; }
 .completion-screen.visible { display: flex; animation: fadeIn 0.5s ease; }
-.completion-title { font-size: 28px; font-weight: 700; color: rgba(255,255,255,0.9); margin-bottom: 20px; text-align: center; }
-.completion-stats { display: flex; gap: 30px; margin-bottom: 30px; }
+.completion-title { font-size: 26px; font-weight: 700; color: rgba(255,255,255,0.9); margin-bottom: 20px; text-align: center; }
+.completion-stats { display: flex; gap: 25px; margin-bottom: 30px; }
 .completion-stat { text-align: center; }
-.completion-stat-value { font-size: 36px; font-weight: 700; color: rgba(100,200,255,0.9); margin-bottom: 8px; }
-.completion-stat-label { font-size: 12px; font-weight: 500; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 1px; }
+.completion-stat-value { font-size: 32px; font-weight: 700; color: rgba(100,200,255,0.9); margin-bottom: 6px; }
+.completion-stat-label { font-size: 11px; font-weight: 500; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 1px; }
 .completion-btn { background: rgba(100,200,255,0.15); color: rgba(255,255,255,0.9); border: none; padding: 18px 40px; border-radius: 40px; font-size: 16px; font-weight: 600; font-family: inherit; cursor: pointer; border: 1px solid rgba(100,200,255,0.3); box-shadow: 0 6px 20px rgba(100,200,255,0.2); }
 .completion-btn:active { transform: scale(0.95); }
 
 /* ШУЛЬТЕ */
 .schulte-grid { position: absolute; inset: 0; display: grid; gap: 6px; padding: 15px; }
-.schulte-cell { display: flex; align-items: center; justify-content: center; border-radius: 12px; cursor: pointer; font-weight: 700; color: rgba(255,255,255,0.9); background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); transition: all 0.2s; position: relative; overflow: hidden; }
+.schulte-cell { display: flex; align-items: center; justify-content: center; border-radius: 12px; cursor: pointer; font-weight: 700; color: rgba(255,255,255,0.95); background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); transition: all 0.2s; position: relative; overflow: hidden; }
 .schulte-cell::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 40%; background: linear-gradient(180deg, rgba(255,255,255,0.15), transparent); pointer-events: none; }
 .schulte-cell:active { transform: scale(0.95); }
-.schulte-cell.correct { background: rgba(100,255,150,0.25); border-color: rgba(100,255,150,0.7); box-shadow: 0 0 15px rgba(100,255,150,0.4); }
+.schulte-cell.correct { background: rgba(100,255,150,0.25); border-color: rgba(100,255,150,0.7); box-shadow: 0 0 15px rgba(100,255,150,0.4); color: rgba(100,255,150,0.95); }
 .schulte-cell.wrong { animation: shake 0.4s ease; background: rgba(255,100,100,0.2); border-color: rgba(255,100,100,0.6); }
-.schulte-hint { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 48px; font-weight: 800; color: rgba(100,200,255,0.25); pointer-events: none; z-index: 2; }
-.schulte-level-badge { position: absolute; top: 20px; left: 50%; transform: translateX(-50%); padding: 8px 20px; border-radius: 20px; font-size: 13px; font-weight: 600; letter-spacing: 1px; background: rgba(100,200,255,0.15); color: rgba(100,200,255,0.9); border: 1px solid rgba(100,200,255,0.3); backdrop-filter: blur(10px); z-index: 5; }
+.schulte-hint { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 56px; font-weight: 800; color: rgba(100,200,255,0.15); pointer-events: none; z-index: 2; }
 
 /* КРАСНО-ЧЁРНАЯ */
 .rc-grid { position: absolute; inset: 0; display: grid; gap: 6px; padding: 15px; }
-.rc-cell { display: flex; align-items: center; justify-content: center; border-radius: 12px; cursor: pointer; font-size: 20px; font-weight: 700; transition: all 0.2s; position: relative; overflow: hidden; }
+.rc-cell { display: flex; align-items: center; justify-content: center; border-radius: 12px; cursor: pointer; font-weight: 700; transition: all 0.2s; position: relative; overflow: hidden; }
 .rc-cell::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 40%; background: linear-gradient(180deg, rgba(255,255,255,0.2), transparent); pointer-events: none; }
 .rc-cell:active { transform: scale(0.95); }
-.rc-cell.red { color: rgba(255,120,120,0.95); background: rgba(255,80,80,0.12); border: 1px solid rgba(255,100,100,0.35); }
-.rc-cell.black { color: rgba(220,220,220,0.95); background: rgba(100,100,100,0.15); border: 1px solid rgba(150,150,150,0.3); }
-.rc-cell.correct { box-shadow: 0 0 20px rgba(100,255,150,0.5); border-color: rgba(100,255,150,0.8) !important; }
+.rc-cell.red { color: rgba(255,130,130,0.95); background: rgba(255,80,80,0.12); border: 1px solid rgba(255,100,100,0.35); }
+.rc-cell.black { color: rgba(230,230,230,0.95); background: rgba(120,120,120,0.15); border: 1px solid rgba(160,160,160,0.3); }
+.rc-cell.correct { background: rgba(100,255,150,0.25) !important; border-color: rgba(100,255,150,0.8) !important; box-shadow: 0 0 15px rgba(100,255,150,0.4); color: rgba(100,255,150,0.95) !important; }
 .rc-cell.wrong { animation: shake 0.4s ease; }
-.rc-mode-indicator { position: absolute; top: 20px; left: 50%; transform: translateX(-50%); padding: 10px 24px; border-radius: 20px; font-size: 14px; font-weight: 600; letter-spacing: 1px; backdrop-filter: blur(10px); z-index: 5; }
-.rc-mode-indicator.red-mode { background: rgba(255,100,100,0.2); color: rgba(255,150,150,0.95); border: 1px solid rgba(255,100,100,0.4); }
-.rc-mode-indicator.black-mode { background: rgba(200,200,200,0.15); color: rgba(220,220,220,0.95); border: 1px solid rgba(200,200,200,0.3); }
-.rc-round-badge { position: absolute; top: 70px; left: 50%; transform: translateX(-50%); padding: 6px 16px; border-radius: 15px; font-size: 12px; font-weight: 600; background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.7); border: 1px solid rgba(255,255,255,0.15); z-index: 5; }
 
 @keyframes shake { 0%,100% { transform: translateX(0); } 25% { transform: translateX(-5px); } 75% { transform: translateX(5px); } }
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
@@ -98,9 +93,10 @@ html, body { width: 100%; height: 100%; height: 100dvh; overflow: hidden; font-f
     <div class="trainer-content">
         <div class="game-zone" id="gameZone1"></div>
         <div class="stats-bar">
-            <div class="stat-item"><div class="stat-value" id="schulteNext">1</div><div class="stat-label">Следующее</div></div>
+            <div class="stat-item"><div class="stat-value" id="schulteNext">1</div><div class="stat-label">След.</div></div>
             <div class="stat-item"><div class="stat-value" id="schulteTime">0с</div><div class="stat-label">Время</div></div>
             <div class="stat-item"><div class="stat-value" id="schulteErrors">0</div><div class="stat-label">Ошибок</div></div>
+            <div class="stat-item"><div class="stat-value" id="schulteRound">5×5</div><div class="stat-label">Раунд 1</div></div>
         </div>
         <button class="action-btn" id="startBtn1" onclick="startSession1()">Начать тренировку</button>
     </div>
@@ -125,9 +121,10 @@ html, body { width: 100%; height: 100%; height: 100dvh; overflow: hidden; font-f
     <div class="trainer-content">
         <div class="game-zone" id="gameZone2"></div>
         <div class="stats-bar">
-            <div class="stat-item"><div class="stat-value" id="rcNext">1</div><div class="stat-label">Следующее</div></div>
+            <div class="stat-item"><div class="stat-value" id="rcNext">1</div><div class="stat-label">След.</div></div>
             <div class="stat-item"><div class="stat-value" id="rcMode">Красные</div><div class="stat-label">Режим</div></div>
             <div class="stat-item"><div class="stat-value" id="rcErrors">0</div><div class="stat-label">Ошибок</div></div>
+            <div class="stat-item"><div class="stat-value" id="rcRound">5×5</div><div class="stat-label">Раунд 1</div></div>
         </div>
         <button class="action-btn" id="startBtn2" onclick="startSession2()">Начать тренировку</button>
     </div>
@@ -136,7 +133,7 @@ html, body { width: 100%; height: 100%; height: 100dvh; overflow: hidden; font-f
         <div class="completion-stats">
             <div class="completion-stat"><div class="completion-stat-value" id="compRcTime">0с</div><div class="completion-stat-label">Время</div></div>
             <div class="completion-stat"><div class="completion-stat-value" id="compRcErrors">0</div><div class="completion-stat-label">Ошибок</div></div>
-            <div class="completion-stat"><div class="completion-stat-value" id="compRcRound">1</div><div class="completion-stat-label">Раунд</div></div>
+            <div class="completion-stat"><div class="completion-stat-value" id="compRcRoundNum">1</div><div class="completion-stat-label">Раунд</div></div>
         </div>
         <button class="completion-btn" onclick="nextRcRound()">Следующий раунд</button>
     </div>
@@ -194,15 +191,15 @@ function formatTime(seconds) {
 }
 
 function shuffleArray(arr) {
-    for (let i = arr.length - 1; i > 0; i--) {
+    const a = [...arr];
+    for (let i = a.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
-        [arr[i], arr[j]] = [arr[j], arr[i]];
+        [a[i], a[j]] = [a[j], a[i]];
     }
-    return arr;
+    return a;
 }
 
 // ===== ТРЕНАЖЁР 1: ТАБЛИЦА ШУЛЬТЕ =====
-// Усложнение: 5×5 → 6×6 → 7×7 → 8×8
 let s1 = { next: 1, total: 25, errors: 0, active: false, startTime: 0, gridSize: 5, round: 1 };
 
 function startSession1() {
@@ -227,8 +224,7 @@ function buildSchulteGrid1() {
     s1.total = total;
     const numbers = shuffleArray(Array.from({length: total}, (_, i) => i + 1));
     
-    // Размер шрифта уменьшается с ростом сетки
-    const fontSize = n === 5 ? 22 : n === 6 ? 18 : n === 7 ? 15 : 13;
+    const fontSize = n === 5 ? 24 : n === 6 ? 20 : n === 7 ? 17 : 14;
     
     const grid = document.createElement('div');
     grid.className = 'schulte-grid';
@@ -250,10 +246,8 @@ function buildSchulteGrid1() {
     hint.id = 'schulteHint';
     zone.appendChild(hint);
     
-    const badge = document.createElement('div');
-    badge.className = 'schulte-level-badge';
-    badge.textContent = `${n}×${n} • Раунд ${s1.round}`;
-    zone.appendChild(badge);
+    document.getElementById('schulteRound').textContent = `${n}×${n}`;
+    document.querySelector('#schulteRound').nextElementSibling.textContent = `Раунд ${s1.round}`;
 }
 
 function clickSchulteCell1(cell) {
@@ -295,25 +289,23 @@ function nextSchulteRound() {
     document.getElementById('gameZone1').innerHTML = '';
     document.getElementById('timer1').textContent = '00:00';
     
-    // Увеличиваем размер сетки
     s1.gridSize++;
-    if (s1.gridSize > 8) s1.gridSize = 5; // цикл: 5→6→7→8→5
+    if (s1.gridSize > 8) s1.gridSize = 5;
     s1.round++;
     
     const btn = document.getElementById('startBtn1');
     btn.disabled = false;
     btn.textContent = 'Начать тренировку';
-    startSession1(); // автозапуск следующего уровня
+    startSession1();
 }
 
 // ===== ТРЕНАЖЁР 2: КРАСНО-ЧЁРНАЯ =====
-// Режимы чередуются: красные → чёрные → красные → чёрные...
-// С каждым раундом сетка растёт: 5×5 → 6×6 → 7×7
-let s2 = { nextRed: 1, nextBlack: 1, total: 25, errors: 0, active: false, startTime: 0, mode: 'red', round: 1, gridSize: 5, redTotal: 0, blackTotal: 0, switches: 0 };
+// Одна таблица на весь раунд. Сначала ищем красные 1..R, потом чёрные 1..B.
+let s2 = { nextRed: 1, nextBlack: 1, redTotal: 0, blackTotal: 0, errors: 0, active: false, startTime: 0, mode: 'red', round: 1, gridSize: 5 };
 
 function startSession2() {
     s2.nextRed = 1; s2.nextBlack = 1; s2.errors = 0; s2.active = true;
-    s2.mode = 'red'; s2.switches = 0;
+    s2.mode = 'red';
     s2.startTime = Date.now();
     document.getElementById('startBtn2').disabled = true;
     document.getElementById('startBtn2').textContent = 'Тренировка...';
@@ -330,23 +322,25 @@ function buildRcGrid2() {
     zone.innerHTML = '';
     const n = s2.gridSize;
     const total = n * n;
-    s2.total = total;
     
     const numbers = shuffleArray(Array.from({length: total}, (_, i) => i + 1));
     
-    // Распределяем цвета: примерно поровну
+    // Распределяем цвета: поровну
     const colors = [];
+    const targetRed = Math.floor(total / 2);
     let redCount = 0, blackCount = 0;
-    const targetRed = Math.ceil(total / 2);
-    numbers.forEach(() => {
+    for (let i = 0; i < total; i++) {
         if (redCount < targetRed && (Math.random() < 0.5 || blackCount >= total - targetRed)) {
             colors.push('red'); redCount++;
         } else {
             colors.push('black'); blackCount++;
         }
-    });
+    }
     s2.redTotal = redCount;
     s2.blackTotal = blackCount;
+    s2.nextRed = 1;
+    s2.nextBlack = 1;
+    s2.mode = 'red';
     
     const fontSize = n === 5 ? 22 : n === 6 ? 18 : n === 7 ? 15 : 13;
     
@@ -365,16 +359,9 @@ function buildRcGrid2() {
     });
     zone.appendChild(grid);
     
-    const indicator = document.createElement('div');
-    indicator.className = 'rc-mode-indicator red-mode';
-    indicator.id = 'rcModeIndicator';
-    indicator.textContent = 'Ищи красные';
-    zone.appendChild(indicator);
-    
-    const roundBadge = document.createElement('div');
-    roundBadge.className = 'rc-round-badge';
-    roundBadge.textContent = `Раунд ${s2.round} • ${n}×${n}`;
-    zone.appendChild(roundBadge);
+    document.getElementById('rcRound').textContent = `${n}×${n}`;
+    document.querySelector('#rcRound').nextElementSibling.textContent = `Раунд ${s2.round}`;
+    updateStats2();
 }
 
 function clickRcCell2(cell) {
@@ -388,14 +375,7 @@ function clickRcCell2(cell) {
             correct = true;
             s2.nextRed++;
             if (s2.nextRed > s2.redTotal) {
-                // Переключаемся на чёрные
                 s2.mode = 'black';
-                s2.switches++;
-                const indicator = document.getElementById('rcModeIndicator');
-                if (indicator) {
-                    indicator.className = 'rc-mode-indicator black-mode';
-                    indicator.textContent = 'Ищи чёрные';
-                }
             }
         }
     } else {
@@ -403,23 +383,7 @@ function clickRcCell2(cell) {
             correct = true;
             s2.nextBlack++;
             if (s2.nextBlack > s2.blackTotal) {
-                // Переключаемся обратно на красные
-                s2.mode = 'red';
-                s2.switches++;
-                s2.nextRed = 1;
-                s2.nextBlack = 1;
-                const indicator = document.getElementById('rcModeIndicator');
-                if (indicator) {
-                    indicator.className = 'rc-mode-indicator red-mode';
-                    indicator.textContent = 'Ищи красные';
-                }
-                // После 3 переключений — раунд завершён
-                if (s2.switches >= 3) {
-                    setTimeout(endSession2, 500);
-                    return;
-                }
-                // Перемешиваем таблицу для нового цикла
-                setTimeout(buildRcGrid2, 600);
+                setTimeout(endSession2, 400);
                 return;
             }
         }
@@ -437,7 +401,8 @@ function clickRcCell2(cell) {
 
 function updateStats2() {
     const next = s2.mode === 'red' ? s2.nextRed : s2.nextBlack;
-    document.getElementById('rcNext').textContent = next;
+    const total = s2.mode === 'red' ? s2.redTotal : s2.blackTotal;
+    document.getElementById('rcNext').textContent = next <= total ? next : '✓';
     document.getElementById('rcMode').textContent = s2.mode === 'red' ? 'Красные' : 'Чёрные';
     document.getElementById('rcErrors').textContent = s2.errors;
 }
@@ -448,7 +413,7 @@ function endSession2() {
     const elapsed = Math.floor((Date.now() - s2.startTime) / 1000);
     document.getElementById('compRcTime').textContent = elapsed + 'с';
     document.getElementById('compRcErrors').textContent = s2.errors;
-    document.getElementById('compRcRound').textContent = s2.round;
+    document.getElementById('compRcRoundNum').textContent = s2.round;
     document.getElementById('completion2').classList.add('visible');
 }
 
@@ -457,7 +422,6 @@ function nextRcRound() {
     document.getElementById('gameZone2').innerHTML = '';
     document.getElementById('timer2').textContent = '00:00';
     
-    // Увеличиваем размер сетки
     s2.gridSize++;
     if (s2.gridSize > 7) s2.gridSize = 5;
     s2.round++;
