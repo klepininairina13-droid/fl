@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-<title>EyeFlow</title>
+<title>BrainFlow</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; -webkit-user-select: none; user-select: none; }
@@ -12,10 +12,8 @@ html, body { width: 100%; height: 100%; height: 100dvh; overflow: hidden; font-f
 .catalog-slider { display: flex; width: 100%; height: 100%; overflow-x: auto; overflow-y: hidden; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
 .catalog-slider::-webkit-scrollbar { display: none; }
 .catalog-slide { min-width: 100vw; width: 100vw; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 0 30px; scroll-snap-align: start; scroll-snap-stop: always; }
-.catalog-slide:nth-child(1) { background: linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 100%); justify-content: flex-start; padding-top: 12vh; }
-.catalog-slide:nth-child(2) { background: linear-gradient(135deg, #0f0a1f 0%, #2e1a3e 100%); }
-.catalog-slide:nth-child(3) { background: linear-gradient(135deg, #0a1a1f 0%, #1a3e3e 100%); }
-.catalog-slide:nth-child(4) { background: linear-gradient(135deg, #1a0f0a 0%, #3e2e1a 100%); }
+.catalog-slide:nth-child(1) { background: linear-gradient(135deg, #0a0a0f, #1a1a2e); justify-content: flex-start; padding-top: 12vh; }
+.catalog-slide:nth-child(2) { background: linear-gradient(135deg, #1a0a0f, #3e1a2e); }
 
 .start-mechanic-btn { position: relative; border: none; padding: 24px 50px; border-radius: 50px; font-size: 20px; font-weight: 600; font-family: inherit; cursor: pointer; min-width: 280px; transition: all 0.3s ease; background: rgba(255,255,255,0.08); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-top: 1px solid rgba(255,255,255,0.3); border-left: 1px solid rgba(255,255,255,0.15); border-right: 1px solid rgba(255,255,255,0.05); border-bottom: 1px solid rgba(255,255,255,0.02); box-shadow: 0 8px 32px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.2); color: rgba(255,255,255,0.9); }
 .start-mechanic-btn::before { content: ''; position: absolute; top: 0; left: 10%; right: 10%; height: 40%; background: linear-gradient(180deg, rgba(255,255,255,0.15) 0%, transparent 100%); border-radius: 50px 50px 40px 40px; pointer-events: none; }
@@ -29,7 +27,7 @@ html, body { width: 100%; height: 100%; height: 100dvh; overflow: hidden; font-f
 .trainer-overlay.active { display: flex; }
 .trainer-header { display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; padding-top: calc(15px + env(safe-area-inset-top, 15px)); flex-shrink: 0; z-index: 10; }
 .icon-btn { width: 44px; height: 44px; border-radius: 50%; border: none; background: rgba(255,255,255,0.08); backdrop-filter: blur(10px); cursor: pointer; display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.8); border: 1px solid rgba(255,255,255,0.15); flex-shrink: 0; }
-.session-timer { background: rgba(255,255,255,0.08); backdrop-filter: blur(10px); padding: 10px 18px; border-radius: 20px; font-size: 14px; font-weight: 600; color: rgba(255,255,255,0.8); border: 1px solid rgba(255,255,255,0.15); flex-shrink: 0; }
+.session-info { background: rgba(255,255,255,0.08); backdrop-filter: blur(10px); padding: 10px 18px; border-radius: 20px; font-size: 14px; font-weight: 600; color: rgba(255,255,255,0.8); border: 1px solid rgba(255,255,255,0.15); flex-shrink: 0; }
 .trainer-content { flex: 1; display: flex; flex-direction: column; padding: 0 20px 10px; overflow: hidden; position: relative; }
 .game-zone { flex: 1; position: relative; border-radius: 24px; overflow: hidden; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); box-shadow: inset 0 2px 20px rgba(0,0,0,0.3); }
 .stats-bar { display: flex; justify-content: space-around; padding: 15px 20px; background: rgba(255,255,255,0.05); backdrop-filter: blur(10px); border-radius: 20px; margin-top: 15px; border: 1px solid rgba(255,255,255,0.1); flex-shrink: 0; }
@@ -51,150 +49,96 @@ html, body { width: 100%; height: 100%; height: 100dvh; overflow: hidden; font-f
 .completion-btn { background: rgba(100,200,255,0.15); color: rgba(255,255,255,0.9); border: none; padding: 18px 40px; border-radius: 40px; font-size: 16px; font-weight: 600; font-family: inherit; cursor: pointer; border: 1px solid rgba(100,200,255,0.3); box-shadow: 0 6px 20px rgba(100,200,255,0.2); }
 .completion-btn:active { transform: scale(0.95); }
 
-/* ТРЕНАЖЁР 1: ТОЧКИ */
-.catch-dot { position: absolute; border-radius: 50%; cursor: pointer; background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.4), rgba(100,200,255,0.6) 50%, rgba(50,150,200,0.8)); box-shadow: 0 0 20px rgba(100,200,255,0.5), 0 0 40px rgba(100,200,255,0.3), inset 0 2px 4px rgba(255,255,255,0.3); animation: dotAppear 0.3s ease; }
-.catch-dot::before { content: ''; position: absolute; top: 15%; left: 20%; width: 30%; height: 30%; background: radial-gradient(circle, rgba(255,255,255,0.6), transparent 70%); border-radius: 50%; }
-@keyframes dotAppear { 0% { transform: scale(0); opacity: 0; } 50% { transform: scale(1.1); } 100% { transform: scale(1); opacity: 1; } }
-@keyframes dotDisappear { 0% { transform: scale(1); opacity: 1; } 100% { transform: scale(0); opacity: 0; } }
+/* ШУЛЬТЕ */
+.schulte-grid { position: absolute; inset: 0; display: grid; gap: 6px; padding: 15px; }
+.schulte-cell { display: flex; align-items: center; justify-content: center; border-radius: 12px; cursor: pointer; font-weight: 700; color: rgba(255,255,255,0.9); background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); transition: all 0.2s; position: relative; overflow: hidden; }
+.schulte-cell::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 40%; background: linear-gradient(180deg, rgba(255,255,255,0.15), transparent); pointer-events: none; }
+.schulte-cell:active { transform: scale(0.95); }
+.schulte-cell.correct { background: rgba(100,255,150,0.25); border-color: rgba(100,255,150,0.7); box-shadow: 0 0 15px rgba(100,255,150,0.4); }
+.schulte-cell.wrong { animation: shake 0.4s ease; background: rgba(255,100,100,0.2); border-color: rgba(255,100,100,0.6); }
+.schulte-hint { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 48px; font-weight: 800; color: rgba(100,200,255,0.25); pointer-events: none; z-index: 2; }
+.schulte-level-badge { position: absolute; top: 20px; left: 50%; transform: translateX(-50%); padding: 8px 20px; border-radius: 20px; font-size: 13px; font-weight: 600; letter-spacing: 1px; background: rgba(100,200,255,0.15); color: rgba(100,200,255,0.9); border: 1px solid rgba(100,200,255,0.3); backdrop-filter: blur(10px); z-index: 5; }
 
-/* ТРЕНАЖЁР 2: ДВИЖУЩИЙСЯ ШАРИК */
-.follow-ball { position: absolute; width: 40px; height: 40px; border-radius: 50%; background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.6), rgba(200,150,255,0.8) 50%, rgba(150,100,220,0.9)); box-shadow: 0 0 25px rgba(200,150,255,0.6), 0 0 50px rgba(200,150,255,0.3); }
-.follow-ball::before { content: ''; position: absolute; top: 15%; left: 20%; width: 30%; height: 30%; background: radial-gradient(circle, rgba(255,255,255,0.8), transparent 70%); border-radius: 50%; }
-.target-zone { position: absolute; border-radius: 50%; border: 2px dashed rgba(200,150,255,0.5); background: rgba(200,150,255,0.05); box-shadow: inset 0 0 20px rgba(200,150,255,0.1); cursor: pointer; transition: all 0.2s; }
-.target-zone:active { transform: scale(0.95); }
-.target-zone.hit { background: rgba(100,255,150,0.2); border-color: rgba(100,255,150,0.6); }
-.target-zone.miss { background: rgba(255,100,100,0.2); border-color: rgba(255,100,100,0.6); }
+/* КРАСНО-ЧЁРНАЯ */
+.rc-grid { position: absolute; inset: 0; display: grid; gap: 6px; padding: 15px; }
+.rc-cell { display: flex; align-items: center; justify-content: center; border-radius: 12px; cursor: pointer; font-size: 20px; font-weight: 700; transition: all 0.2s; position: relative; overflow: hidden; }
+.rc-cell::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 40%; background: linear-gradient(180deg, rgba(255,255,255,0.2), transparent); pointer-events: none; }
+.rc-cell:active { transform: scale(0.95); }
+.rc-cell.red { color: rgba(255,120,120,0.95); background: rgba(255,80,80,0.12); border: 1px solid rgba(255,100,100,0.35); }
+.rc-cell.black { color: rgba(220,220,220,0.95); background: rgba(100,100,100,0.15); border: 1px solid rgba(150,150,150,0.3); }
+.rc-cell.correct { box-shadow: 0 0 20px rgba(100,255,150,0.5); border-color: rgba(100,255,150,0.8) !important; }
+.rc-cell.wrong { animation: shake 0.4s ease; }
+.rc-mode-indicator { position: absolute; top: 20px; left: 50%; transform: translateX(-50%); padding: 10px 24px; border-radius: 20px; font-size: 14px; font-weight: 600; letter-spacing: 1px; backdrop-filter: blur(10px); z-index: 5; }
+.rc-mode-indicator.red-mode { background: rgba(255,100,100,0.2); color: rgba(255,150,150,0.95); border: 1px solid rgba(255,100,100,0.4); }
+.rc-mode-indicator.black-mode { background: rgba(200,200,200,0.15); color: rgba(220,220,220,0.95); border: 1px solid rgba(200,200,200,0.3); }
+.rc-round-badge { position: absolute; top: 70px; left: 50%; transform: translateX(-50%); padding: 6px 16px; border-radius: 15px; font-size: 12px; font-weight: 600; background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.7); border: 1px solid rgba(255,255,255,0.15); z-index: 5; }
 
-/* ТРЕНАЖЁР 3: ЦВЕТА */
-.color-grid { position: absolute; inset: 0; display: grid; gap: 8px; padding: 15px; }
-.color-cell { border-radius: 12px; cursor: pointer; transition: all 0.2s; position: relative; overflow: hidden; }
-.color-cell::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 40%; background: linear-gradient(180deg, rgba(255,255,255,0.2), transparent); pointer-events: none; }
-.color-cell:active { transform: scale(0.95); }
-.color-cell.correct { box-shadow: 0 0 20px rgba(100,255,150,0.5); border: 2px solid rgba(100,255,150,0.8); }
-.color-cell.wrong { animation: shake 0.4s ease; }
 @keyframes shake { 0%,100% { transform: translateX(0); } 25% { transform: translateX(-5px); } 75% { transform: translateX(5px); } }
-
-/* ТРЕНАЖЁР 4: ДЫХАНИЕ */
-.breath-circle { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); border-radius: 50%; background: radial-gradient(circle, rgba(100,200,255,0.3), rgba(100,200,255,0.05) 70%, transparent); border: 2px solid rgba(100,200,255,0.4); box-shadow: 0 0 60px rgba(100,200,255,0.3), inset 0 0 40px rgba(100,200,255,0.1); transition: all 4s ease-in-out; }
-.breath-text { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 20px; font-weight: 500; color: rgba(255,255,255,0.8); letter-spacing: 2px; pointer-events: none; }
-.breath-counter { position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); font-size: 14px; font-weight: 500; color: rgba(255,255,255,0.5); letter-spacing: 1px; }
-
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 </style>
 </head>
 <body>
 
 <div class="catalog-slider" id="catalogSlider">
-    <div class="catalog-slide"><button class="start-mechanic-btn" onclick="openTrainer(1)">Лови точку</button></div>
-    <div class="catalog-slide"><button class="start-mechanic-btn" onclick="openTrainer(2)">Следуй за шариком</button></div>
-    <div class="catalog-slide"><button class="start-mechanic-btn" onclick="openTrainer(3)">Найди цвет</button></div>
-    <div class="catalog-slide"><button class="start-mechanic-btn" onclick="openTrainer(4)">Расслабь взгляд</button></div>
+    <div class="catalog-slide"><button class="start-mechanic-btn" onclick="openTrainer(1)">Таблица Шульте</button></div>
+    <div class="catalog-slide"><button class="start-mechanic-btn" onclick="openTrainer(2)">Красно-чёрная</button></div>
 </div>
 <div class="catalog-dots">
-    <div class="catalog-dot active"></div><div class="catalog-dot"></div><div class="catalog-dot"></div><div class="catalog-dot"></div>
+    <div class="catalog-dot active"></div>
+    <div class="catalog-dot"></div>
 </div>
 
-<!-- ТРЕНАЖЁР 1 -->
+<!-- ТРЕНАЖЁР 1: ШУЛЬТЕ -->
 <div class="trainer-overlay" id="trainer1">
     <div class="trainer-header">
         <button class="icon-btn" onclick="closeTrainer()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg></button>
-        <div class="session-timer" id="timer1">00:00</div>
+        <div class="session-info" id="timer1">00:00</div>
         <button class="icon-btn" onclick="toggleSound()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 5L6 9H2v6h4l5 4V5z"/></svg></button>
     </div>
     <div class="trainer-content">
         <div class="game-zone" id="gameZone1"></div>
         <div class="stats-bar">
-            <div class="stat-item"><div class="stat-value" id="caughtCount">0</div><div class="stat-label">Поймано</div></div>
-            <div class="stat-item"><div class="stat-value" id="missedCount">0</div><div class="stat-label">Промахов</div></div>
-            <div class="stat-item"><div class="stat-value" id="accuracy1">0%</div><div class="stat-label">Точность</div></div>
+            <div class="stat-item"><div class="stat-value" id="schulteNext">1</div><div class="stat-label">Следующее</div></div>
+            <div class="stat-item"><div class="stat-value" id="schulteTime">0с</div><div class="stat-label">Время</div></div>
+            <div class="stat-item"><div class="stat-value" id="schulteErrors">0</div><div class="stat-label">Ошибок</div></div>
         </div>
         <button class="action-btn" id="startBtn1" onclick="startSession1()">Начать тренировку</button>
     </div>
     <div class="completion-screen" id="completion1">
-        <div class="completion-title">Тренировка завершена</div>
+        <div class="completion-title">Таблица пройдена</div>
         <div class="completion-stats">
-            <div class="completion-stat"><div class="completion-stat-value" id="compCaught">0</div><div class="completion-stat-label">Поймано</div></div>
-            <div class="completion-stat"><div class="completion-stat-value" id="compAcc">0%</div><div class="completion-stat-label">Точность</div></div>
+            <div class="completion-stat"><div class="completion-stat-value" id="compSchulteTime">0с</div><div class="completion-stat-label">Время</div></div>
+            <div class="completion-stat"><div class="completion-stat-value" id="compSchulteErrors">0</div><div class="completion-stat-label">Ошибок</div></div>
+            <div class="completion-stat"><div class="completion-stat-value" id="compSchulteSize">5×5</div><div class="completion-stat-label">Размер</div></div>
         </div>
-        <button class="completion-btn" onclick="restartSession1()">Начать заново</button>
+        <button class="completion-btn" onclick="nextSchulteRound()">Следующий уровень</button>
     </div>
 </div>
 
-<!-- ТРЕНАЖЁР 2 -->
+<!-- ТРЕНАЖЁР 2: КРАСНО-ЧЁРНАЯ -->
 <div class="trainer-overlay" id="trainer2">
     <div class="trainer-header">
         <button class="icon-btn" onclick="closeTrainer()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg></button>
-        <div class="session-timer" id="timer2">00:00</div>
+        <div class="session-info" id="timer2">00:00</div>
         <button class="icon-btn" onclick="toggleSound()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 5L6 9H2v6h4l5 4V5z"/></svg></button>
     </div>
     <div class="trainer-content">
         <div class="game-zone" id="gameZone2"></div>
         <div class="stats-bar">
-            <div class="stat-item"><div class="stat-value" id="hitsCount">0</div><div class="stat-label">Попаданий</div></div>
-            <div class="stat-item"><div class="stat-value" id="totalTargets">0</div><div class="stat-label">Целей</div></div>
-            <div class="stat-item"><div class="stat-value" id="accuracy2">0%</div><div class="stat-label">Точность</div></div>
+            <div class="stat-item"><div class="stat-value" id="rcNext">1</div><div class="stat-label">Следующее</div></div>
+            <div class="stat-item"><div class="stat-value" id="rcMode">Красные</div><div class="stat-label">Режим</div></div>
+            <div class="stat-item"><div class="stat-value" id="rcErrors">0</div><div class="stat-label">Ошибок</div></div>
         </div>
         <button class="action-btn" id="startBtn2" onclick="startSession2()">Начать тренировку</button>
     </div>
     <div class="completion-screen" id="completion2">
-        <div class="completion-title">Тренировка завершена</div>
+        <div class="completion-title">Раунд завершён</div>
         <div class="completion-stats">
-            <div class="completion-stat"><div class="completion-stat-value" id="compHits">0</div><div class="completion-stat-label">Попаданий</div></div>
-            <div class="completion-stat"><div class="completion-stat-value" id="compAcc2">0%</div><div class="completion-stat-label">Точность</div></div>
+            <div class="completion-stat"><div class="completion-stat-value" id="compRcTime">0с</div><div class="completion-stat-label">Время</div></div>
+            <div class="completion-stat"><div class="completion-stat-value" id="compRcErrors">0</div><div class="completion-stat-label">Ошибок</div></div>
+            <div class="completion-stat"><div class="completion-stat-value" id="compRcRound">1</div><div class="completion-stat-label">Раунд</div></div>
         </div>
-        <button class="completion-btn" onclick="restartSession2()">Начать заново</button>
-    </div>
-</div>
-
-<!-- ТРЕНАЖЁР 3 -->
-<div class="trainer-overlay" id="trainer3">
-    <div class="trainer-header">
-        <button class="icon-btn" onclick="closeTrainer()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg></button>
-        <div class="session-timer" id="timer3">00:00</div>
-        <button class="icon-btn" onclick="toggleSound()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 5L6 9H2v6h4l5 4V5z"/></svg></button>
-    </div>
-    <div class="trainer-content">
-        <div class="game-zone" id="gameZone3"></div>
-        <div class="stats-bar">
-            <div class="stat-item"><div class="stat-value" id="foundCount">0</div><div class="stat-label">Найдено</div></div>
-            <div class="stat-item"><div class="stat-value" id="roundNum">1</div><div class="stat-label">Раунд</div></div>
-            <div class="stat-item"><div class="stat-value" id="mistakesCount">0</div><div class="stat-label">Ошибок</div></div>
-        </div>
-        <button class="action-btn" id="startBtn3" onclick="startSession3()">Начать тренировку</button>
-    </div>
-    <div class="completion-screen" id="completion3">
-        <div class="completion-title">Тренировка завершена</div>
-        <div class="completion-stats">
-            <div class="completion-stat"><div class="completion-stat-value" id="compFound">0</div><div class="completion-stat-label">Найдено</div></div>
-            <div class="completion-stat"><div class="completion-stat-value" id="compMist">0</div><div class="completion-stat-label">Ошибок</div></div>
-        </div>
-        <button class="completion-btn" onclick="restartSession3()">Начать заново</button>
-    </div>
-</div>
-
-<!-- ТРЕНАЖЁР 4 -->
-<div class="trainer-overlay" id="trainer4">
-    <div class="trainer-header">
-        <button class="icon-btn" onclick="closeTrainer()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg></button>
-        <div class="session-timer" id="timer4">00:00</div>
-        <button class="icon-btn" onclick="toggleSound()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 5L6 9H2v6h4l5 4V5z"/></svg></button>
-    </div>
-    <div class="trainer-content">
-        <div class="game-zone" id="gameZone4"></div>
-        <div class="stats-bar">
-            <div class="stat-item"><div class="stat-value" id="breathCount">0</div><div class="stat-label">Циклов</div></div>
-            <div class="stat-item"><div class="stat-value" id="timeSpent">0с</div><div class="stat-label">Время</div></div>
-            <div class="stat-item"><div class="stat-value" id="relaxScore">0%</div><div class="stat-label">Расслабление</div></div>
-        </div>
-        <button class="action-btn" id="startBtn4" onclick="startSession4()">Начать сессию</button>
-    </div>
-    <div class="completion-screen" id="completion4">
-        <div class="completion-title">Сессия завершена</div>
-        <div class="completion-stats">
-            <div class="completion-stat"><div class="completion-stat-value" id="compBreath">0</div><div class="completion-stat-label">Циклов дыхания</div></div>
-            <div class="completion-stat"><div class="completion-stat-value" id="compTime">0с</div><div class="completion-stat-label">Время</div></div>
-        </div>
-        <button class="completion-btn" onclick="restartSession4()">Начать заново</button>
+        <button class="completion-btn" onclick="nextRcRound()">Следующий раунд</button>
     </div>
 </div>
 
@@ -233,15 +177,13 @@ function closeTrainer() {
 }
 
 function stopAllSessions() {
-    clearInterval(window._timer1); clearInterval(window._timer2); clearInterval(window._timer3); clearInterval(window._timer4);
-    clearTimeout(window._timeout1); clearTimeout(window._timeout2); clearTimeout(window._timeout3); clearTimeout(window._timeout4);
-    cancelAnimationFrame(window._animFrame2);
-    ['gameZone1','gameZone2','gameZone3','gameZone4'].forEach(id => document.getElementById(id).innerHTML = '');
-    ['completion1','completion2','completion3','completion4'].forEach(id => document.getElementById(id).classList.remove('visible'));
-    ['startBtn1','startBtn2','startBtn3','startBtn4'].forEach(id => {
+    clearInterval(window._timer1); clearInterval(window._timer2);
+    ['gameZone1','gameZone2'].forEach(id => document.getElementById(id).innerHTML = '');
+    ['completion1','completion2'].forEach(id => document.getElementById(id).classList.remove('visible'));
+    ['startBtn1','startBtn2'].forEach(id => {
         const btn = document.getElementById(id);
         btn.disabled = false;
-        btn.textContent = id === 'startBtn4' ? 'Начать сессию' : 'Начать тренировку';
+        btn.textContent = 'Начать тренировку';
     });
 }
 
@@ -251,364 +193,279 @@ function formatTime(seconds) {
     return `${m}:${s}`;
 }
 
-// ===== ТРЕНАЖЁР 1: ЛОВИ ТОЧКУ =====
-let s1 = { caught: 0, missed: 0, active: false, dotEl: null, timeout: null, startTime: 0, difficulty: 1 };
+function shuffleArray(arr) {
+    for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
+}
+
+// ===== ТРЕНАЖЁР 1: ТАБЛИЦА ШУЛЬТЕ =====
+// Усложнение: 5×5 → 6×6 → 7×7 → 8×8
+let s1 = { next: 1, total: 25, errors: 0, active: false, startTime: 0, gridSize: 5, round: 1 };
 
 function startSession1() {
-    s1.caught = 0; s1.missed = 0; s1.active = true; s1.startTime = Date.now(); s1.difficulty = 1;
+    s1.next = 1; s1.errors = 0; s1.active = true;
+    s1.startTime = Date.now();
     document.getElementById('startBtn1').disabled = true;
     document.getElementById('startBtn1').textContent = 'Тренировка...';
     updateStats1();
     window._timer1 = setInterval(() => {
         const elapsed = Math.floor((Date.now() - s1.startTime) / 1000);
         document.getElementById('timer1').textContent = formatTime(elapsed);
-        if (elapsed >= 60) endSession1();
+        document.getElementById('schulteTime').textContent = elapsed + 'с';
     }, 1000);
-    spawnDot1();
+    buildSchulteGrid1();
 }
 
-function spawnDot1() {
-    if (!s1.active) return;
+function buildSchulteGrid1() {
     const zone = document.getElementById('gameZone1');
-    const zRect = zone.getBoundingClientRect();
-    const size = Math.max(25, 60 - s1.difficulty * 2);
-    const lifetime = Math.max(400, 2000 - s1.difficulty * 100);
-    const x = Math.random() * (zRect.width - size);
-    const y = Math.random() * (zRect.height - size);
-    s1.dotEl = document.createElement('div');
-    s1.dotEl.className = 'catch-dot';
-    s1.dotEl.style.cssText = `width:${size}px;height:${size}px;left:${x}px;top:${y}px;`;
-    s1.dotEl.onclick = catchDot1;
-    zone.appendChild(s1.dotEl);
-    s1.timeout = setTimeout(() => {
-        if (s1.dotEl && s1.dotEl.parentNode) {
-            s1.dotEl.style.animation = 'dotDisappear 0.3s ease';
-            setTimeout(() => { if (s1.dotEl && s1.dotEl.parentNode) s1.dotEl.remove(); }, 300);
-        }
-        s1.missed++; s1.difficulty++; updateStats1();
-        setTimeout(spawnDot1, 200);
-    }, lifetime);
+    zone.innerHTML = '';
+    const n = s1.gridSize;
+    const total = n * n;
+    s1.total = total;
+    const numbers = shuffleArray(Array.from({length: total}, (_, i) => i + 1));
+    
+    // Размер шрифта уменьшается с ростом сетки
+    const fontSize = n === 5 ? 22 : n === 6 ? 18 : n === 7 ? 15 : 13;
+    
+    const grid = document.createElement('div');
+    grid.className = 'schulte-grid';
+    grid.style.gridTemplateColumns = `repeat(${n}, 1fr)`;
+    numbers.forEach(num => {
+        const cell = document.createElement('div');
+        cell.className = 'schulte-cell';
+        cell.textContent = num;
+        cell.dataset.value = num;
+        cell.style.fontSize = fontSize + 'px';
+        cell.onclick = () => clickSchulteCell1(cell);
+        grid.appendChild(cell);
+    });
+    zone.appendChild(grid);
+    
+    const hint = document.createElement('div');
+    hint.className = 'schulte-hint';
+    hint.textContent = '1';
+    hint.id = 'schulteHint';
+    zone.appendChild(hint);
+    
+    const badge = document.createElement('div');
+    badge.className = 'schulte-level-badge';
+    badge.textContent = `${n}×${n} • Раунд ${s1.round}`;
+    zone.appendChild(badge);
 }
 
-function catchDot1() {
-    if (!s1.active || !s1.dotEl) return;
-    clearTimeout(s1.timeout);
-    s1.dotEl.style.animation = 'dotDisappear 0.2s ease';
-    setTimeout(() => { if (s1.dotEl && s1.dotEl.parentNode) s1.dotEl.remove(); }, 200);
-    s1.caught++; s1.difficulty++; updateStats1();
-    setTimeout(spawnDot1, 300);
+function clickSchulteCell1(cell) {
+    if (!s1.active || cell.classList.contains('correct')) return;
+    const value = parseInt(cell.dataset.value);
+    if (value === s1.next) {
+        cell.classList.add('correct');
+        s1.next++;
+        const hint = document.getElementById('schulteHint');
+        if (hint) hint.textContent = s1.next <= s1.total ? s1.next : '✓';
+        if (s1.next > s1.total) {
+            setTimeout(endSession1, 400);
+        }
+    } else {
+        cell.classList.add('wrong');
+        s1.errors++;
+        setTimeout(() => cell.classList.remove('wrong'), 500);
+    }
+    updateStats1();
 }
 
 function updateStats1() {
-    document.getElementById('caughtCount').textContent = s1.caught;
-    document.getElementById('missedCount').textContent = s1.missed;
-    const t = s1.caught + s1.missed;
-    document.getElementById('accuracy1').textContent = (t > 0 ? Math.round(s1.caught/t*100) : 0) + '%';
+    document.getElementById('schulteNext').textContent = s1.next <= s1.total ? s1.next : '✓';
+    document.getElementById('schulteErrors').textContent = s1.errors;
 }
 
 function endSession1() {
     s1.active = false;
     clearInterval(window._timer1);
-    clearTimeout(s1.timeout);
-    document.getElementById('compCaught').textContent = s1.caught;
-    const t = s1.caught + s1.missed;
-    document.getElementById('compAcc').textContent = (t > 0 ? Math.round(s1.caught/t*100) : 0) + '%';
+    const elapsed = Math.floor((Date.now() - s1.startTime) / 1000);
+    document.getElementById('compSchulteTime').textContent = elapsed + 'с';
+    document.getElementById('compSchulteErrors').textContent = s1.errors;
+    document.getElementById('compSchulteSize').textContent = `${s1.gridSize}×${s1.gridSize}`;
     document.getElementById('completion1').classList.add('visible');
 }
 
-function restartSession1() {
+function nextSchulteRound() {
     document.getElementById('completion1').classList.remove('visible');
     document.getElementById('gameZone1').innerHTML = '';
     document.getElementById('timer1').textContent = '00:00';
+    
+    // Увеличиваем размер сетки
+    s1.gridSize++;
+    if (s1.gridSize > 8) s1.gridSize = 5; // цикл: 5→6→7→8→5
+    s1.round++;
+    
     const btn = document.getElementById('startBtn1');
-    btn.disabled = false; btn.textContent = 'Начать тренировку';
-    startSession1();
+    btn.disabled = false;
+    btn.textContent = 'Начать тренировку';
+    startSession1(); // автозапуск следующего уровня
 }
 
-// ===== ТРЕНАЖЁР 2: СЛЕДУЙ ЗА ШАРИКОМ =====
-let s2 = { hits: 0, targets: 0, active: false, ball: null, zone: null, target: null, animFrame: null, angle: 0, speed: 0.02, radius: 80, cx: 0, cy: 0, startTime: 0 };
+// ===== ТРЕНАЖЁР 2: КРАСНО-ЧЁРНАЯ =====
+// Режимы чередуются: красные → чёрные → красные → чёрные...
+// С каждым раундом сетка растёт: 5×5 → 6×6 → 7×7
+let s2 = { nextRed: 1, nextBlack: 1, total: 25, errors: 0, active: false, startTime: 0, mode: 'red', round: 1, gridSize: 5, redTotal: 0, blackTotal: 0, switches: 0 };
 
 function startSession2() {
-    s2.hits = 0; s2.targets = 0; s2.active = true; s2.angle = 0; s2.speed = 0.02; s2.radius = 80;
+    s2.nextRed = 1; s2.nextBlack = 1; s2.errors = 0; s2.active = true;
+    s2.mode = 'red'; s2.switches = 0;
     s2.startTime = Date.now();
     document.getElementById('startBtn2').disabled = true;
     document.getElementById('startBtn2').textContent = 'Тренировка...';
     updateStats2();
-    setupZone2();
     window._timer2 = setInterval(() => {
         const elapsed = Math.floor((Date.now() - s2.startTime) / 1000);
         document.getElementById('timer2').textContent = formatTime(elapsed);
-        if (elapsed >= 60) endSession2();
     }, 1000);
+    buildRcGrid2();
 }
 
-function setupZone2() {
+function buildRcGrid2() {
     const zone = document.getElementById('gameZone2');
     zone.innerHTML = '';
-    const zRect = zone.getBoundingClientRect();
-    s2.cx = zRect.width / 2;
-    s2.cy = zRect.height / 2;
-    s2.zone = zone;
-    s2.ball = document.createElement('div');
-    s2.ball.className = 'follow-ball';
-    zone.appendChild(s2.ball);
-    spawnTarget2();
-    animateBall2();
+    const n = s2.gridSize;
+    const total = n * n;
+    s2.total = total;
+    
+    const numbers = shuffleArray(Array.from({length: total}, (_, i) => i + 1));
+    
+    // Распределяем цвета: примерно поровну
+    const colors = [];
+    let redCount = 0, blackCount = 0;
+    const targetRed = Math.ceil(total / 2);
+    numbers.forEach(() => {
+        if (redCount < targetRed && (Math.random() < 0.5 || blackCount >= total - targetRed)) {
+            colors.push('red'); redCount++;
+        } else {
+            colors.push('black'); blackCount++;
+        }
+    });
+    s2.redTotal = redCount;
+    s2.blackTotal = blackCount;
+    
+    const fontSize = n === 5 ? 22 : n === 6 ? 18 : n === 7 ? 15 : 13;
+    
+    const grid = document.createElement('div');
+    grid.className = 'rc-grid';
+    grid.style.gridTemplateColumns = `repeat(${n}, 1fr)`;
+    numbers.forEach((num, idx) => {
+        const cell = document.createElement('div');
+        cell.className = `rc-cell ${colors[idx]}`;
+        cell.textContent = num;
+        cell.dataset.value = num;
+        cell.dataset.color = colors[idx];
+        cell.style.fontSize = fontSize + 'px';
+        cell.onclick = () => clickRcCell2(cell);
+        grid.appendChild(cell);
+    });
+    zone.appendChild(grid);
+    
+    const indicator = document.createElement('div');
+    indicator.className = 'rc-mode-indicator red-mode';
+    indicator.id = 'rcModeIndicator';
+    indicator.textContent = 'Ищи красные';
+    zone.appendChild(indicator);
+    
+    const roundBadge = document.createElement('div');
+    roundBadge.className = 'rc-round-badge';
+    roundBadge.textContent = `Раунд ${s2.round} • ${n}×${n}`;
+    zone.appendChild(roundBadge);
 }
 
-function spawnTarget2() {
-    if (!s2.active) return;
-    const zone = s2.zone;
-    if (s2.target) s2.target.remove();
-    const angle = Math.random() * Math.PI * 2;
-    const r = s2.radius + 30 + Math.random() * 40;
-    const x = s2.cx + Math.cos(angle) * r - 30;
-    const y = s2.cy + Math.sin(angle) * r - 30;
-    s2.target = document.createElement('div');
-    s2.target.className = 'target-zone';
-    s2.target.style.cssText = `width:60px;height:60px;left:${x}px;top:${y}px;`;
-    s2.target.dataset.angle = angle;
-    s2.target.onclick = hitTarget2;
-    zone.appendChild(s2.target);
-}
-
-function animateBall2() {
-    if (!s2.active) return;
-    s2.angle += s2.speed;
-    const x = s2.cx + Math.cos(s2.angle) * s2.radius - 20;
-    const y = s2.cy + Math.sin(s2.angle) * s2.radius - 20;
-    if (s2.ball) { s2.ball.style.left = x + 'px'; s2.ball.style.top = y + 'px'; }
-    s2.animFrame = requestAnimationFrame(animateBall2);
-}
-
-function hitTarget2() {
-    if (!s2.active || !s2.target) return;
-    const ballAngle = s2.angle % (Math.PI * 2);
-    const targetAngle = parseFloat(s2.target.dataset.angle);
-    let diff = Math.abs(ballAngle - targetAngle);
-    if (diff > Math.PI) diff = Math.PI * 2 - diff;
-    const tolerance = Math.max(0.3, 0.6 - s2.targets * 0.01);
-    if (diff < tolerance) {
-        s2.target.classList.add('hit');
-        s2.hits++;
-        s2.speed += 0.002;
+function clickRcCell2(cell) {
+    if (!s2.active || cell.classList.contains('correct')) return;
+    const value = parseInt(cell.dataset.value);
+    const color = cell.dataset.color;
+    let correct = false;
+    
+    if (s2.mode === 'red') {
+        if (color === 'red' && value === s2.nextRed) {
+            correct = true;
+            s2.nextRed++;
+            if (s2.nextRed > s2.redTotal) {
+                // Переключаемся на чёрные
+                s2.mode = 'black';
+                s2.switches++;
+                const indicator = document.getElementById('rcModeIndicator');
+                if (indicator) {
+                    indicator.className = 'rc-mode-indicator black-mode';
+                    indicator.textContent = 'Ищи чёрные';
+                }
+            }
+        }
     } else {
-        s2.target.classList.add('miss');
+        if (color === 'black' && value === s2.nextBlack) {
+            correct = true;
+            s2.nextBlack++;
+            if (s2.nextBlack > s2.blackTotal) {
+                // Переключаемся обратно на красные
+                s2.mode = 'red';
+                s2.switches++;
+                s2.nextRed = 1;
+                s2.nextBlack = 1;
+                const indicator = document.getElementById('rcModeIndicator');
+                if (indicator) {
+                    indicator.className = 'rc-mode-indicator red-mode';
+                    indicator.textContent = 'Ищи красные';
+                }
+                // После 3 переключений — раунд завершён
+                if (s2.switches >= 3) {
+                    setTimeout(endSession2, 500);
+                    return;
+                }
+                // Перемешиваем таблицу для нового цикла
+                setTimeout(buildRcGrid2, 600);
+                return;
+            }
+        }
     }
-    s2.targets++;
+    
+    if (correct) {
+        cell.classList.add('correct');
+    } else {
+        cell.classList.add('wrong');
+        s2.errors++;
+        setTimeout(() => cell.classList.remove('wrong'), 500);
+    }
     updateStats2();
-    setTimeout(spawnTarget2, 500);
 }
 
 function updateStats2() {
-    document.getElementById('hitsCount').textContent = s2.hits;
-    document.getElementById('totalTargets').textContent = s2.targets;
-    document.getElementById('accuracy2').textContent = (s2.targets > 0 ? Math.round(s2.hits/s2.targets*100) : 0) + '%';
+    const next = s2.mode === 'red' ? s2.nextRed : s2.nextBlack;
+    document.getElementById('rcNext').textContent = next;
+    document.getElementById('rcMode').textContent = s2.mode === 'red' ? 'Красные' : 'Чёрные';
+    document.getElementById('rcErrors').textContent = s2.errors;
 }
 
 function endSession2() {
     s2.active = false;
     clearInterval(window._timer2);
-    cancelAnimationFrame(s2.animFrame);
-    document.getElementById('compHits').textContent = s2.hits;
-    document.getElementById('compAcc2').textContent = (s2.targets > 0 ? Math.round(s2.hits/s2.targets*100) : 0) + '%';
+    const elapsed = Math.floor((Date.now() - s2.startTime) / 1000);
+    document.getElementById('compRcTime').textContent = elapsed + 'с';
+    document.getElementById('compRcErrors').textContent = s2.errors;
+    document.getElementById('compRcRound').textContent = s2.round;
     document.getElementById('completion2').classList.add('visible');
 }
 
-function restartSession2() {
+function nextRcRound() {
     document.getElementById('completion2').classList.remove('visible');
     document.getElementById('gameZone2').innerHTML = '';
     document.getElementById('timer2').textContent = '00:00';
+    
+    // Увеличиваем размер сетки
+    s2.gridSize++;
+    if (s2.gridSize > 7) s2.gridSize = 5;
+    s2.round++;
+    
     const btn = document.getElementById('startBtn2');
-    btn.disabled = false; btn.textContent = 'Начать тренировку';
+    btn.disabled = false;
+    btn.textContent = 'Начать тренировку';
     startSession2();
-}
-
-// ===== ТРЕНАЖЁР 3: НАЙДИ ЦВЕТ =====
-let s3 = { found: 0, round: 1, mistakes: 0, active: false, startTime: 0 };
-
-function startSession3() {
-    s3.found = 0; s3.round = 1; s3.mistakes = 0; s3.active = true;
-    s3.startTime = Date.now();
-    document.getElementById('startBtn3').disabled = true;
-    document.getElementById('startBtn3').textContent = 'Тренировка...';
-    updateStats3();
-    window._timer3 = setInterval(() => {
-        const elapsed = Math.floor((Date.now() - s3.startTime) / 1000);
-        document.getElementById('timer3').textContent = formatTime(elapsed);
-    }, 1000);
-    buildColorGrid3();
-}
-
-function buildColorGrid3() {
-    const zone = document.getElementById('gameZone3');
-    zone.innerHTML = '';
-    const cols = 4, rows = 4;
-    const total = cols * rows;
-    const diffCount = Math.min(3, 1 + Math.floor(s3.round / 3));
-    const diffIndices = [];
-    while (diffIndices.length < diffCount) {
-        const idx = Math.floor(Math.random() * total);
-        if (!diffIndices.includes(idx)) diffIndices.push(idx);
-    }
-    const baseHue = Math.floor(Math.random() * 360);
-    const baseSat = 50 + Math.random() * 20;
-    const baseLight = 40 + Math.random() * 15;
-    const diffHue = (baseHue + 40 + s3.round * 5) % 360;
-    const diffSat = baseSat + 20;
-    const diffLight = baseLight + 15;
-    const grid = document.createElement('div');
-    grid.className = 'color-grid';
-    grid.style.gridTemplateColumns = `repeat(${cols}, 1fr)`;
-    for (let i = 0; i < total; i++) {
-        const cell = document.createElement('div');
-        cell.className = 'color-cell';
-        const isDiff = diffIndices.includes(i);
-        const hue = isDiff ? diffHue : baseHue;
-        const sat = isDiff ? diffSat : baseSat;
-        const light = isDiff ? diffLight : baseLight;
-        cell.style.background = `linear-gradient(135deg, hsl(${hue},${sat}%,${light}%), hsl(${hue},${sat+10}%,${light-10}%))`;
-        if (isDiff) cell.dataset.diff = 'true';
-        cell.onclick = () => clickColorCell3(cell);
-        grid.appendChild(cell);
-    }
-    zone.appendChild(grid);
-}
-
-function clickColorCell3(cell) {
-    if (!s3.active || cell.classList.contains('correct') || cell.classList.contains('wrong')) return;
-    if (cell.dataset.diff === 'true') {
-        cell.classList.add('correct');
-        s3.found++;
-        const totalDiffs = document.querySelectorAll('.color-cell[data-diff="true"]').length;
-        const foundDiffs = document.querySelectorAll('.color-cell.correct').length;
-        if (foundDiffs >= totalDiffs) {
-            s3.round++;
-            setTimeout(buildColorGrid3, 800);
-        }
-    } else {
-        cell.classList.add('wrong');
-        s3.mistakes++;
-        setTimeout(() => cell.classList.remove('wrong'), 500);
-    }
-    updateStats3();
-}
-
-function updateStats3() {
-    document.getElementById('foundCount').textContent = s3.found;
-    document.getElementById('roundNum').textContent = s3.round;
-    document.getElementById('mistakesCount').textContent = s3.mistakes;
-}
-
-function endSession3() {
-    s3.active = false;
-    clearInterval(window._timer3);
-    document.getElementById('compFound').textContent = s3.found;
-    document.getElementById('compMist').textContent = s3.mistakes;
-    document.getElementById('completion3').classList.add('visible');
-}
-
-function restartSession3() {
-    document.getElementById('completion3').classList.remove('visible');
-    document.getElementById('gameZone3').innerHTML = '';
-    document.getElementById('timer3').textContent = '00:00';
-    const btn = document.getElementById('startBtn3');
-    btn.disabled = false; btn.textContent = 'Начать тренировку';
-    startSession3();
-}
-
-// ===== ТРЕНАЖЁР 4: РАССЛАБЬ ВЗГЛЯД =====
-let s4 = { cycles: 0, startTime: 0, active: false, timer: null, phase: 'in' };
-
-function startSession4() {
-    s4.cycles = 0; s4.active = true;
-    s4.startTime = Date.now();
-    document.getElementById('startBtn4').disabled = true;
-    document.getElementById('startBtn4').textContent = 'Сессия...';
-    updateStats4();
-    setupBreath4();
-    window._timer4 = setInterval(() => {
-        const elapsed = Math.floor((Date.now() - s4.startTime) / 1000);
-        document.getElementById('timeSpent').textContent = elapsed + 'с';
-        document.getElementById('timer4').textContent = formatTime(elapsed);
-        if (elapsed >= 120) endSession4();
-    }, 1000);
-    setTimeout(() => runBreathCycle4(), 500);
-}
-
-function setupBreath4() {
-    const zone = document.getElementById('gameZone4');
-    zone.innerHTML = '';
-    const circle = document.createElement('div');
-    circle.className = 'breath-circle';
-    circle.id = 'breathCircle';
-    circle.style.width = '100px';
-    circle.style.height = '100px';
-    zone.appendChild(circle);
-    const text = document.createElement('div');
-    text.className = 'breath-text';
-    text.id = 'breathText';
-    text.textContent = 'Вдох';
-    zone.appendChild(text);
-    const counter = document.createElement('div');
-    counter.className = 'breath-counter';
-    counter.id = 'breathCounter';
-    counter.textContent = 'Цикл 0';
-    zone.appendChild(counter);
-}
-
-function runBreathCycle4() {
-    if (!s4.active) return;
-    const circle = document.getElementById('breathCircle');
-    const text = document.getElementById('breathText');
-    const counter = document.getElementById('breathCounter');
-    if (!circle) return;
-    counter.textContent = `Цикл ${s4.cycles + 1}`;
-    text.textContent = 'Вдох';
-    circle.style.width = '200px';
-    circle.style.height = '200px';
-    circle.style.boxShadow = '0 0 80px rgba(100,200,255,0.5), inset 0 0 50px rgba(100,200,255,0.2)';
-    setTimeout(() => {
-        if (!s4.active) return;
-        text.textContent = 'Задержка';
-        setTimeout(() => {
-            if (!s4.active) return;
-            text.textContent = 'Выдох';
-            circle.style.width = '100px';
-            circle.style.height = '100px';
-            circle.style.boxShadow = '0 0 60px rgba(100,200,255,0.3), inset 0 0 40px rgba(100,200,255,0.1)';
-            setTimeout(() => {
-                if (!s4.active) return;
-                s4.cycles++;
-                updateStats4();
-                setTimeout(() => runBreathCycle4(), 500);
-            }, 4000);
-        }, 2000);
-    }, 4000);
-}
-
-function updateStats4() {
-    document.getElementById('breathCount').textContent = s4.cycles;
-    const score = Math.min(100, s4.cycles * 10);
-    document.getElementById('relaxScore').textContent = score + '%';
-}
-
-function endSession4() {
-    s4.active = false;
-    clearInterval(window._timer4);
-    document.getElementById('compBreath').textContent = s4.cycles;
-    const elapsed = Math.floor((Date.now() - s4.startTime) / 1000);
-    document.getElementById('compTime').textContent = elapsed + 'с';
-    document.getElementById('completion4').classList.add('visible');
-}
-
-function restartSession4() {
-    document.getElementById('completion4').classList.remove('visible');
-    document.getElementById('gameZone4').innerHTML = '';
-    document.getElementById('timer4').textContent = '00:00';
-    const btn = document.getElementById('startBtn4');
-    btn.disabled = false; btn.textContent = 'Начать сессию';
-    startSession4();
 }
 </script>
 
